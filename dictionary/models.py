@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from taggit_autosuggest.managers import TaggableManager
 
 #. ---------------------------------------------------------------
 # Alphabet Function
@@ -83,6 +84,8 @@ class Dictionary(models.Model):
   description = models.TextField(blank=False, verbose_name=_('The Explanation'), help_text=_('The description of the term being explained'))
   alpha_position = models.CharField(max_length=2, db_index=True, editable=True, blank=False, null=False, choices=ALPHABET_CHOICES, verbose_name=_('Alphabet Position'), help_text=_('Show this entry under which Alphabet position'))
   is_active = models.BooleanField(default=True, verbose_name=_('Is Active'), help_text=_('Show this entry?'))
+  tags = TaggableManager()
+  
   class Meta:
     verbose_name = 'Dictionary entry'
     verbose_name_plural = 'Dictionary entries'
